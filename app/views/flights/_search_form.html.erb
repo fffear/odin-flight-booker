@@ -1,0 +1,34 @@
+<%= form_for(:flight, url: flights_path, method: 'get') do |f| %>
+  <%= f.label(:from_airport_id, "From Airport") %>
+  <br>
+  <%= f.select(:from_airport_id,
+               options_for_select(airports,
+               prefilled_flight_details(:from_airport_id))) %>
+
+  <br>
+
+  <%= f.label(:to_airport_id, "To Airport") %>
+  <br>
+  <%= f.select(:to_airport_id,
+               options_for_select(airports,
+               prefilled_flight_details(:to_airport_id))) %>
+
+  <br>
+
+  <%= f.label(:num_passengers, "Number of Passengers") %>
+  <br>
+  <%= f.select(:num_passengers,
+               options_for_select(num_passengers,
+               prefilled_flight_details(:num_passengers))) %>
+
+  <br>
+
+  <%= f.label(:start_datetime, "Date") %>
+  <br>
+  <%= f.select(:start_datetime,
+               options_for_select(flight_dates,
+               prefilled_flight_details(:start_datetime))) %>
+
+  <br>
+  <%= submit_tag("Search") %>
+<% end %>

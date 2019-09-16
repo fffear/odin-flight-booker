@@ -1,0 +1,12 @@
+<% unless search_results.nil? %>
+  <%= form_for(:booking, url: "bookings_url", method: 'get') do |f| %>
+    <% search_results.each do |flight| %>
+      <%= f.radio_button(:flight, flight.id) %>
+      <%= f.label("fights_#{flight.id}".to_sym, flight.display_journey)  %>
+    <% end %>
+
+    <br>
+
+    <%= f.submit "Create Booking" %>
+  <% end %>
+<% end %>

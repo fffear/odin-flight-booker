@@ -1,0 +1,8 @@
+<h1>Search Flights</h1>
+<%= render 'search_form', airports:       @airports,
+                          num_passengers: @num_passengers,
+                          flight_dates:   @flight_dates %>
+
+
+<h2>Search Results</h2>
+<%= render 'search_result_form', search_results: @search_results %>
