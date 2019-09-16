@@ -19,6 +19,18 @@ class Flight < ApplicationRecord
   belongs_to :from_airport, { class_name: :Airport, foreign_key: :from_airport_id }
   belongs_to :to_airport, { class_name: :Airport, foreign_key: :to_airport_id }
 
+  scope :search_criteria, ->(from_airport, to_airport, start_datetime, finish_datetime) do
+    where("from_airport_id = ? AND
+          to_airport_id = ? AND
+          start_datetime >= ? AND
+          start_datetime < ?",
+          from_airport,
+          to_airport,
+          start_datetime,
+          finish_datetime)
+    .includes(:from_airport, :to_airport)
+  end
+
   def date_formatted
     start_datetime.strftime("%d/%m/%Y at %I:%M %P")
   end

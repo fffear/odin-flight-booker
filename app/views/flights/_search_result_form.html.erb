@@ -1,4 +1,5 @@
-<% unless search_results.nil? %>
+
+<% if search_results %>
   <%= form_for(:booking, url: "bookings_url", method: 'get') do |f| %>
     <% search_results.each do |flight| %>
       <%= f.radio_button(:flight, flight.id) %>
@@ -7,6 +8,12 @@
 
     <br>
 
-    <%= f.submit "Create Booking" %>
+    <%= f.hidden_field(:num_passengers, value: num_passengers)  %>
+
+    <br>
+
+    <% if search_results.any? %>
+      <%= f.submit "Create Booking" %>
+    <% end %>
   <% end %>
 <% end %>
