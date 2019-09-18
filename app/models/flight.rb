@@ -18,6 +18,8 @@ class Flight < ApplicationRecord
 
   belongs_to :from_airport, { class_name: :Airport, foreign_key: :from_airport_id }
   belongs_to :to_airport, { class_name: :Airport, foreign_key: :to_airport_id }
+  has_many :bookings
+  has_many :passengers, through: :bookings
 
   scope :search_criteria, ->(from_airport, to_airport, start_datetime, finish_datetime) do
     where("from_airport_id = ? AND
@@ -33,6 +35,14 @@ class Flight < ApplicationRecord
 
   def date_formatted
     start_datetime.strftime("%d/%m/%Y at %I:%M %P")
+  end
+
+  def formatted_date_only
+    start_datetime.strftime("%a, %dth %B, %Y")
+  end
+
+  def formatted_time_only
+    start_datetime.strftime("%H:%M %p")
   end
 
   def display_journey

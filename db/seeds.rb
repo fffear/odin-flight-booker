@@ -8,6 +8,9 @@
 
 Airport.delete_all
 Flight.delete_all
+Booking.delete_all
+Passenger.delete_all
+PassengerBookingDetail.delete_all
 
 airport_1 = Airport.create!(code: 'NYC')
 airport_2 = Airport.create!(code: 'SFO')
@@ -19,6 +22,8 @@ airport_7 = Airport.create!(code: 'BOS')
 airport_8 = Airport.create!(code: 'MIA')
 airport_9 = Airport.create!(code: 'PHX')
 airport_10 = Airport.create!(code: 'PHL')
+
+
 
 flight_1 = Flight.create(from_airport_id: 1,
                          to_airport_id: 2,
@@ -44,3 +49,12 @@ flight_5 = Flight.create(from_airport_id: 9,
                          to_airport_id: 10,
                          start_datetime: Faker::Time.between(from: DateTime.now + 1.day, to: DateTime.now + 1.day + 5.hours),
                          duration: (2..9).to_a.sample.hours)
+
+
+booking_1 = Booking.create(flight_id: flight_1.id)
+
+booking_1.passengers.create(name: "Test Passenger 1",
+                            email: "testpassenger1@example.com")
+
+booking_1.passengers.create(name: "Test Passenger 2",
+                            email: "testpassenger2@example.com")

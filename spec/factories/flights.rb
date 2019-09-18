@@ -24,10 +24,5 @@ FactoryBot.define do
       association :from_airport, factory: :airport_static
       association :to_airport, factory: :airport_static
     end
-
-    # factory :flight_with_same_start_and_end do
-    #   association :from_airport, factory: :airport_static
-    #   association :to_airport, factory: :airport_static
-    # end
   end
 end

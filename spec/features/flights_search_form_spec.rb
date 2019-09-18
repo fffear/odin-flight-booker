@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 feature 'Flight search form' do
-  # given(:airport_1) { FactoryBot.build(:airport, code: "NYC") }
-  # given(:airport_2) { FactoryBot.build(:airport, code: "LAX") }
   given(:flight) { FactoryBot.build(:flight) }
   
   scenario 'has a form to search via flight select criteria' do
@@ -18,15 +16,21 @@ feature 'Flight search form' do
     expect(page).to have_selector("input[type=submit]")
   end
 
-  scenario 'displays search results form form after entering search details' do
+  scenario 'displays search results form after entering search details' do
     flight.save
-    visit root_url
-    select("#{flight.from_airport.code}", from: 'flight_from_airport_id')
-    select("#{flight.to_airport.code}", from: 'flight_to_airport_id')
-    select("2", from: 'flight_num_passengers')
-    select("#{flight.date_formatted}", from: 'flight_start_datetime')
-    click_button("Search")
+    fill_search_form(flight)
     expect(page).to have_content("#{flight.from_airport.code} to #{flight.to_airport.code}")
     expect(page).to have_selector("input[type=hidden][value=2]#booking_num_passengers", visible: false)
+    expect(page).to have_selector("input[type=submit][value='Create Booking']")
+    fill_search_results_form(flight)
+    expect(page).to have_content("New Booking")
+  end
+
+  scenario 'redirect back and displays search results form when no flight is selected' do
+    flight.save
+    fill_search_form(flight)
+    check_search_results(flight)
+    click_button("Create Booking")
+    check_search_results(flight)
   end
 end

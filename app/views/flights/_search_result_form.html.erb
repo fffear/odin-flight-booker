@@ -1,9 +1,9 @@
 
 <% if search_results %>
-  <%= form_for(:booking, url: "bookings_url", method: 'get') do |f| %>
+  <%= form_for(:booking, url: new_booking_url, method: 'get') do |f| %>
     <% search_results.each do |flight| %>
-      <%= f.radio_button(:flight, flight.id) %>
-      <%= f.label("fights_#{flight.id}".to_sym, flight.display_journey)  %>
+      <%= f.radio_button(:flight_id, flight.id) %>
+      <%= f.label("flights_#{flight.id}".to_sym, flight.display_journey)  %>
     <% end %>
 
     <br>

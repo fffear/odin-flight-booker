@@ -1,24 +1,20 @@
-# README
+# Odin Flight Booker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This flight booker project has been created as part of the curriculum of [The Odin Project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/building-advanced-forms?ref=lnav).
 
-Things you may want to cover:
 
-* Ruby version
+## Ruby version
+Ruby version 5.2.3
 
-* System dependencies
+## Rails version
+Rails version 5.2.3
 
-* Configuration
+## Getting Started
+Clone this repository and run:
 
-* Database creation
+`bundle install`
 
-* Database initialization
+Then run the following 2 commands consecutively.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`bundle exec rails db:create`
+`bundle exec rails db:seed`
