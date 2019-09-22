@@ -25,28 +25,28 @@ airport_10 = Airport.create!(code: 'PHL')
 
 
 
-flight_1 = Flight.create(from_airport_id: 1,
-                         to_airport_id: 2,
+flight_1 = Flight.create(from_airport_id: airport_1.id,
+                         to_airport_id: airport_2.id,
                          start_datetime: Faker::Time.between(from: DateTime.now + 1.day, to: DateTime.now + 1.day + 5.hours),
                          duration: (2..9).to_a.sample.hours)
 
-flight_2 = Flight.create(from_airport_id: 3,
-                         to_airport_id: 4,
+flight_2 = Flight.create(from_airport_id:airport_3.id,
+                         to_airport_id: airport_4.id,
                          start_datetime: Faker::Time.between(from: DateTime.now + 1.day, to: DateTime.now + 1.day + 5.hours),
                          duration: (2..9).to_a.sample.hours)
 
-flight_3 = Flight.create(from_airport_id: 5,
-                         to_airport_id: 6,
+flight_3 = Flight.create(from_airport_id: airport_5.id,
+                         to_airport_id: airport_6.id,
                          start_datetime: Faker::Time.between(from: DateTime.now + 1.day, to: DateTime.now + 1.day + 5.hours),
                          duration: (2..9).to_a.sample.hours)
 
-flight_4 = Flight.create(from_airport_id: 7,
-                         to_airport_id: 8,
+flight_4 = Flight.create(from_airport_id: airport_7.id,
+                         to_airport_id: airport_8.id,
                          start_datetime: Faker::Time.between(from: DateTime.now + 1.day, to: DateTime.now + 1.day + 5.hours),
                          duration: (2..9).to_a.sample.hours)
 
-flight_5 = Flight.create(from_airport_id: 9,
-                         to_airport_id: 10,
+flight_5 = Flight.create(from_airport_id: airport_9.id,
+                         to_airport_id: airport_10.id,
                          start_datetime: Faker::Time.between(from: DateTime.now + 1.day, to: DateTime.now + 1.day + 5.hours),
                          duration: (2..9).to_a.sample.hours)
 
