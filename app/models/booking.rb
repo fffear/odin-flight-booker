@@ -19,22 +19,21 @@ class Booking < ApplicationRecord
   accepts_nested_attributes_for :passengers
 
   def create_associated_passengers(passengers_attributes)
-    begin
-      ActiveRecord::Base.transaction do
-        if self.save!
-          passengers_attributes.each do |key, passengers_attribute|
-            self.passengers.create!(name:  passengers_attribute[:name],
-                                    email: passengers_attribute[:email])
-          end
-        end
-      end
-    rescue ActiveRecord::RecordInvalid => exception
-      self.passengers = []
+    if passengers_attributes.to_h.any? { |k, v| v[:name].blank? || v[:email].blank? }
       passengers_attributes.each do |key, passengers_attribute|
         self.passengers.build(name:  passengers_attribute[:name],
-                              email: passengers_attribute[:email])
+                               email: passengers_attribute[:email])
       end
-      return
+    else
+      self.save
+      passengers_attributes.each do |key, passengers_attribute|
+        if passenger = Passenger.find_by(email: passengers_attribute[:email])
+          self.passengers << passenger
+        else
+          self.passengers.create(name:  passengers_attribute[:name],
+                                 email: passengers_attribute[:email])
+        end
+      end
     end
   end
 end

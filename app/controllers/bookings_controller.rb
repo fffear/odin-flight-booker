@@ -13,6 +13,9 @@ class BookingsController < ApplicationController
 
     if !@booking.new_record?
       redirect_to @booking
+      @booking.passengers.each do |passenger|
+        PassengerMailer.with(passenger: passenger, booking: @booking).thank_you_email.deliver_later
+      end
       return
     else
       render 'new'
